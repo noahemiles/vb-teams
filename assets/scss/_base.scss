@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    height: 100%;
 
     html,
     body {
@@ -20,16 +19,17 @@ header {
 
 main {
     background-color: green;
-    height: 90vh;
+    min-height: 90vh;
 }
 
-ul {
+header ul {
     display: flex;
     list-style: none;
     justify-content: space-between;
+    height: 100%;
 }
 
-li {
+header ul li {
     display: flex;
     align-items: center;
     text-align: center;
@@ -53,4 +53,40 @@ li {
             transform: scale(1.3);
         }
     }
+}
+
+span#games {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+div.game {
+    h2 {
+        line-height: 3em;
+    }
+    min-height: 20vh;
+    width: 90%;
+    background-color: whitesmoke;
+    margin: 0 auto;
+    text-align: center;
+    border: 5px solid black;
+    flex-grow: 1;
+}
+
+.team {
+    ul {
+        line-height: 2em;
+        font-size: large;
+    }
+    width: 50%;
+    max-width: 50%;
+}
+
+.no-list {
+    list-style: none;
+}
+
+.flex {
+    display: flex;
 }

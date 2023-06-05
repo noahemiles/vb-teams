@@ -21,6 +21,9 @@ export class Game {
             this.teams.splice(teamIndex, 1);
         }
     }
+    getTeams() {
+        return this.teams;
+    }
     checkIfInGame(teamToCheck) {
         this.teams.forEach((team, index) => {
             if (JSON.stringify(teamToCheck) === JSON.stringify(team)) {
