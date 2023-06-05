@@ -32,7 +32,6 @@ li {
   display: flex;
   align-items: center;
   text-align: center;
-  border: 5px solid yellow;
   width: 33.3333333333vw;
 }
 li.left {
@@ -40,6 +39,14 @@ li.left {
 }
 li.right {
   padding-right: 10px;
+  border-bottom-left-radius: 100%;
+  border-left: 3px solid black;
+  border-bottom: 1px solid black;
+  background-color: yellow;
+  transition: transform 0.7s ease-in-out;
+}
+li.right:hover {
+  transform: scale(1.3);
 }
 
 /*# sourceMappingURL=style.css.map */
