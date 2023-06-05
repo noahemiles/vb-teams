@@ -25,7 +25,7 @@ const game1 = new Game([t1, t2], 2, "Game 1"); //Team(s), teamLimit, Name
 const game2 = new Game([t1, t2], 2, "Game 2"); //Team(s), teamLimit, Name
 const game3 = new Game([t1, t2], 2, "Game 3"); //Team(s), teamLimit, Name
 const game4 = new Game([t1, t2], 2, "Game 4"); //Team(s), teamLimit, Name
-console.log(game1.gameToObject());
+//console.log(game1.gameToObject());
 //}
 //test();
 class Instance {
@@ -45,17 +45,22 @@ class Instance {
     removeGame(gameName) {
         this.games.forEach((game, index) => {
             if (game.name === gameName) {
-                this.games.slice(index, 1);
+                this.games.splice(index, 1);
+                this.render(true);
                 return;
             }
         });
-        this.render();
     }
-    render() {
+    render(remove = false) {
+        const games = document.getElementById('games');
+        if (remove) {
+            games.innerHTML = "";
+        }
         this.games.forEach(game => {
-            if (!document.getElementById(game.name)) {
-                const games = document.getElementById('games');
-                games.appendChild(this.buildGameUI(game));
+            const gameName = document.getElementById(game.name);
+            if (!gameName) {
+                let newGames = this.buildGameUI(game);
+                games.appendChild(newGames);
             }
         });
     }
@@ -88,6 +93,9 @@ class Instance {
 }
 const UI = new Instance();
 UI.addGame(game1);
-UI.addGame(game2);
-UI.addGame(game3);
-UI.addGame(game4);
+//UI.addGame(game2);
+//UI.addGame(game3);
+//UI.addGame(game4);
+//console.log(UI.getGames());
+//UI.removeGame(game2.name);
+//console.log(UI.getGames());
