@@ -21,23 +21,21 @@ main {
   min-height: 90vh;
 }
 
-header ul {
-  display: flex;
+header > ul {
   list-style: none;
   justify-content: space-between;
   height: 100%;
 }
 
-header ul li {
-  display: flex;
+header > ul li {
   align-items: center;
   text-align: center;
   width: 33.3333333333vw;
 }
-header ul li.left {
+header > ul li.left {
   padding-left: 10px;
 }
-header ul li.right {
+header > ul li.right {
   padding-right: 10px;
   border-bottom-left-radius: 100%;
   border-left: 3px solid black;
@@ -45,8 +43,11 @@ header ul li.right {
   background-color: yellow;
   transition: transform 0.7s ease-in-out;
 }
-header ul li.right.clicked {
+header > ul li.right.clicked {
   transform: scale(1.3);
+}
+header > ul li.right:hover {
+  cursor: pointer;
 }
 
 div.mobile-menu {
@@ -58,6 +59,10 @@ div.mobile-menu {
   border: 5px solid red;
   display: block;
   transition: transform 0.7s ease-in-out;
+}
+div.mobile-menu ul {
+  text-align: center;
+  line-height: 5em;
 }
 
 #menu-icon {
@@ -73,7 +78,6 @@ div.mobile-menu {
 
 span#games {
   height: 100%;
-  display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
@@ -106,6 +110,12 @@ div.game h2 {
 
 .flex {
   display: flex;
+}
+.flex.column {
+  flex-direction: column;
+}
+.flex.row {
+  flex-direction: row;
 }
 
 /*# sourceMappingURL=style.css.map */

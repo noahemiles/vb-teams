@@ -22,15 +22,13 @@ main {
     min-height: 90vh;
 }
 
-header ul {
-    display: flex;
+header>ul {
     list-style: none;
     justify-content: space-between;
     height: 100%;
 }
 
-header ul li {
-    display: flex;
+header>ul li {
     align-items: center;
     text-align: center;
     width: calc(100vw / 3);
@@ -52,6 +50,9 @@ header ul li {
         &.clicked {
             transform: scale(1.3);
         }
+        &:hover {
+            cursor: pointer;
+        }
     }
 }
 
@@ -64,6 +65,11 @@ div.mobile-menu {
     border: 5px solid red;
     display: block;
     transition: transform .7s ease-in-out;
+
+    ul {
+        text-align: center;
+        line-height: 5em;
+    }
 }
 
 #menu-icon {
@@ -79,7 +85,6 @@ div.mobile-menu {
 
 span#games {
     height: 100%;
-    display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
@@ -114,4 +119,12 @@ div.game {
 
 .flex {
     display: flex;
+
+    &.column {
+        flex-direction: column;
+    }
+
+    &.row {
+        flex-direction: row;
+    }
 }
