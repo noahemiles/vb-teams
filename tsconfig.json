@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "outDir": "build"
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
