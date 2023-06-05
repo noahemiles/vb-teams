@@ -60,6 +60,13 @@ div.mobile-menu {
   transition: transform 0.7s ease-in-out;
 }
 
+#menu-icon {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  height: 10vh;
+}
+
 .show {
   transform: translateX(-145%);
 }
