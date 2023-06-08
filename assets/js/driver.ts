@@ -21,8 +21,8 @@ const n3 = new Player("Noah");
 const n4 = new Player("Noah");
 const n5 = new Player("Noah");
 //players[], name
-const t1 = new Team([g, g1, g2, g3, g4, g5]);
-const t2 = new Team([n, n1, n2, n3, n4, n5]);
+const t1 = new Team([g, g1, g2, g3, g4, g5], "Team Gisela");
+const t2 = new Team([n, n1, n2, n3, n4, n5], "Team Noah");
 //teams[], team#Limit, name
 const game1 = new Game([t1, t2], 2, "Game 1"); //Team(s), teamLimit, Name
 const game2 = new Game([t1, t2], 2, "Game 2"); //Team(s), teamLimit, Name
