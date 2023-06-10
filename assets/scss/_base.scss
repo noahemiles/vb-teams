@@ -22,6 +22,7 @@ main {
     min-height: 90vh;
 }
 
+/* Header */
 header>ul {
     list-style: none;
     justify-content: space-between;
@@ -50,12 +51,14 @@ header>ul li {
         &.clicked {
             transform: scale(1.3);
         }
+
         &:hover {
             cursor: pointer;
         }
     }
 }
 
+/* Menu */
 div.mobile-menu {
     background-color: olivedrab;
     height: 100vh;
@@ -82,6 +85,7 @@ div.mobile-menu {
     transform: translateX(0) scale(1);
 }
 
+/* Game */
 span#games {
     height: 100%;
     flex-direction: column;
@@ -112,6 +116,132 @@ div.game {
     max-width: 50%;
 }
 
+/* Player */
+form.info {
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+button[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Responsive styles for mobile devices */
+@media only screen and (max-width: 600px) {
+    form.info {
+        padding: 10px;
+    }
+
+    input[type="text"],
+    select {
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    button[type="submit"] {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+}
+/* Custom checkbox styling */
+
+.slider {
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+    vertical-align: middle;
+    margin-bottom: 15px;
+}
+
+.slider input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider .slider-round {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: lightblue;
+    border: 2px solid #999;
+    border-radius: 40px;
+    transition: .4s;
+}
+
+.slider .slider-round:before {
+    position: absolute;
+    content: "";
+    height: 30px;
+    width: 30px;
+    left: 0px;
+    bottom: 0;
+    background-color: #fff;
+    border: 3px solid #999;
+    border-radius: 50%;
+    transition: .4s;
+}
+
+input:checked + .slider-round {
+    background-color: #2196F3;
+}
+
+input:checked + .slider-round:before {
+    transform: translateX(39px);
+}
+
+.slider .slider-round:after {
+    content: "No";
+    color: #999;
+    display: block;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 20%;
+    font-size: 12px;
+    font-weight: bold;
+    transition: .4s;
+}
+
+input:checked + .slider-round:after {
+    content: "Yes";
+    color: #fff;
+}
+
+/* Generic */
 .no-list {
     list-style: none;
 }
