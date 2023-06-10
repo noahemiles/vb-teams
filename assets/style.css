@@ -132,7 +132,7 @@ input[type=checkbox] {
   margin-right: 5px;
 }
 
-button[type=submit] {
+input[type=button] {
   background-color: #4caf50;
   color: white;
   border: none;
@@ -141,7 +141,7 @@ button[type=submit] {
   cursor: pointer;
 }
 
-button[type=submit]:hover {
+input[type=button]:hover {
   background-color: #45a049;
 }
 
@@ -155,7 +155,7 @@ button[type=submit]:hover {
     font-size: 14px;
     padding: 6px;
   }
-  button[type=submit] {
+  input[type=button] {
     font-size: 16px;
     padding: 8px 16px;
   }

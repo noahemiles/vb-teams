@@ -37,7 +37,7 @@
                     <input type="checkbox" id="tallCheckbox">
                     <span class="slider-round"></span>
                 </div>
-                <button type="submit">Add Player</button>
+                <input class="favorite styled" type="button" value="Add to favorites">
             </form>
         </span>
     </main>
@@ -45,7 +45,7 @@
     <script src="build/Player.js"></script>
     <script>
         const tallCheckbox = document.getElementById("tallCheckbox");
-        tallCheckbox.addEventListener("click", function() {
+        tallCheckbox.addEventListener("click", function () {
             tallCheckbox.classList.toggle("checked");
         });
     </script>
