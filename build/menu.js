@@ -6,9 +6,9 @@ sunMenu.addEventListener('click', () => {
 });
 function createMenuElement() {
     const menuItems = [
-        { "nicename": "Games", "href": "/" },
-        { "nicename": "Teams", "href": "/teams.html" },
-        { "nicename": "Players", "href": "/players.html" }
+        { "nicename": "Games", "href": "./" },
+        { "nicename": "Teams", "href": "./teams.html" },
+        { "nicename": "Players", "href": "./players.html" }
     ], ulElement = createElement('ul', { 'class': 'flex column no-list' });
     menuItems.forEach(item => {
         const liElement = createElement('li', { 'class': 'menu-items' }), aElement = createElement('a', { "href": item.href }, item.nicename);
