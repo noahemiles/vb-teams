@@ -61,9 +61,8 @@ div.mobile-menu {
     height: 100vh;
     width: 100vw;
     position: absolute;
-    right: calc(-150%);
+    transform: translateX(100vw) scale(0);
     border: 5px solid red;
-    display: block;
     transition: transform .7s ease-in-out;
 
     ul {
@@ -79,8 +78,8 @@ div.mobile-menu {
     height: 10vh;
 }
 
-.show {
-    transform: translateX(-145%);
+.mobile-menu.show {
+    transform: translateX(0) scale(1);
 }
 
 span#games {
