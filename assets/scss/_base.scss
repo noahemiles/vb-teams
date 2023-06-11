@@ -156,6 +156,34 @@ input[type="button"]:hover {
     background-color: #45a049;
 }
 
+.player-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    gap: 10px;
+    padding: 10px;
+}
+
+.player-info {
+    flex: 0 0 calc(50vw - 40px);
+    /* Set each player container to occupy 50% width minus the gap */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background: lightblue;
+}
+
+.player-info p {
+    margin: 0;
+}
+
+.player-info button {
+    margin-top: 10px;
+}
+
 /* Responsive styles for mobile devices */
 @media only screen and (max-width: 600px) {
     form.info {
@@ -173,6 +201,7 @@ input[type="button"]:hover {
         padding: 8px 16px;
     }
 }
+
 /* Custom checkbox styling */
 
 .slider {
@@ -216,11 +245,11 @@ input[type="button"]:hover {
     transition: .4s;
 }
 
-input:checked + .slider-round {
+input:checked+.slider-round {
     background-color: #2196F3;
 }
 
-input:checked + .slider-round:before {
+input:checked+.slider-round:before {
     transform: translateX(39px);
 }
 
@@ -237,7 +266,7 @@ input:checked + .slider-round:before {
     transition: .4s;
 }
 
-input:checked + .slider-round:after {
+input:checked+.slider-round:after {
     content: "Yes";
     color: #fff;
 }

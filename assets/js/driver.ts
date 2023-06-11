@@ -1,19 +1,18 @@
 import { Game } from "./Game.js";
 import { Team } from "./Team.js";
 import { Player } from "./Player.js";
-import Genders from "./Genders.js";
 
 //function test() {
 
 const tall = true,
     notTall = false;
 // name, gender, tall, team?
-const g = new Player("Gisela", Genders.female, notTall);
-const g1 = new Player("Gisela", Genders.female, notTall);
-const g2 = new Player("Gisela", Genders.female, notTall);
-const g3 = new Player("Gisela", Genders.female, notTall);
-const g4 = new Player("Gisela", Genders.female, notTall);
-const g5 = new Player("Gisela", Genders.female, notTall);
+const g = new Player("Gisela", "female", notTall);
+const g1 = new Player("Gisela", "female", notTall);
+const g2 = new Player("Gisela", "female", notTall);
+const g3 = new Player("Gisela", "female", notTall);
+const g4 = new Player("Gisela", "female", notTall);
+const g5 = new Player("Gisela", "female", notTall);
 const n = new Player("Noah");
 const n1 = new Player("Noah");
 const n2 = new Player("Noah");

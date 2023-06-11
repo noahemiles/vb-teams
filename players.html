@@ -26,29 +26,24 @@
         <span id="players" class="">
             <form action="" class="info flex column">
                 <label for="name">Name:</label>
-                <input name="name" type="text" class="player-info">
+                <input id="nameInput" name="name" type="text" required>
                 <label for="gender">Gender:</label>
                 <select name="gender" id="genderDropdown">
                     <option value="female">Female</option>
                     <option value="male">Male</option>
                 </select>
                 <label for="tallCheckbox">Tall:</label>
-                <div class="slider">
+                <div id="slider" class="slider">
                     <input type="checkbox" id="tallCheckbox">
                     <span class="slider-round"></span>
                 </div>
                 <input id="addPlayerButton" class="favorite styled" type="button" value="Add Player">
             </form>
+            <div id="playerList" class="player-list"></div>
         </span>
     </main>
     <script src="build/menu.js"></script>
-    <script src="build/Player.js"></script>
-    <script>
-        const sliderCheckbox = document.getElementById("slider");
-        sliderCheckbox.addEventListener("click", function () {
-            sliderCheckbox.classList.toggle("checked");
-        });
-    </script>
+    <script type="module" src="build/playerHandler.js"></script>
 </body>
 
 </html>

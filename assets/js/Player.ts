@@ -1,4 +1,3 @@
-import Gender from "./Genders.js";
 import { Team, unassigned } from "./Team.js";
 
 export class Player {
@@ -6,7 +5,7 @@ export class Player {
     gender: string;
     tall: boolean;
     team: Team;
-    constructor(name = `player-${Date.now()}`, gender = Gender.male, tall = false, team = unassigned) {
+    constructor(name = `player-${Date.now()}`, gender = "male", tall = false, team = unassigned) {
         this.name = name;
         this.gender = gender;
         this.tall = tall;
