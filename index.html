@@ -56,10 +56,10 @@
                     ng-class="{active: isSelectedPlayer(player)}">
                     <button type="button" class="close" ng-click="deletePlayer(player)">&times;</button>
                     <input type="checkbox" name="" id="" ng-model="player.active" ng-change="cancel()">
-                    <button type="button" class="btn btn-link" ng-click="setEditedPlayer(player);startEditing();"><span
+                    <button type="button" class="btn btn-link" ng-click="cancel();setEditedPlayer(player);startEditing();"><span
                         class="glyphicon glyphicon-pencil"></span>
                     </button>
-                    <a ng-click="startViewing(player);setEditedPlayer(player);">{{player.name}}</a>
+                    <a ng-click="cancel();startViewing(player);setEditedPlayer(player);">{{player.name}}</a>
                     <a style="font-size: small;">{{player.team}}</a>
                 </div>
                 <hr />
@@ -106,13 +106,13 @@
                     <form class="edit-form" role="form" ng-submit="updatePlayer(editedPlayer)" novalidate>
                         <div class="form-group">
                             <label>Player Name</label>
-                            <input type="text" class="form-control" ng-model="editedPlayer.name" ng-disabled="!shouldShowEditing()"
+                            <input type="text" class="form-control" ng-model="editedPlayer.name" ng-disabled="!shouldShowEditing()" ng-change="updateUnsaved()"
                                 placeholder="Enter name" autofocus>
                         </div>
                         <div class="form-group">
                             <label for="editedPlayerGender">Player Gender</label>
                             <select type="text" class="form-control" id="editedPlayerGender"
-                                ng-model="editedPlayer.gender" ng-disabled="!shouldShowEditing()">
+                                ng-model="editedPlayer.gender" ng-disabled="!shouldShowEditing()" ng-change="updateUnsaved()">
                                 <option value="female">Female</option>
                                 <option value="male">Male</option>
                             </select>
@@ -120,16 +120,16 @@
                         <div class="form-group">
                             <label>Player Team</label>
                             <select class="form-control" ng-options="team for team in teams"
-                                ng-model="editedPlayer.team" ng-selected="editedPlayer.team" ng-disabled="!shouldShowEditing()">
+                                ng-model="editedPlayer.team" ng-selected="editedPlayer.team" ng-disabled="!shouldShowEditing()" ng-change="updateUnsaved()">
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="editedPlayerActive">Player Active</label>
-                            <input type="checkbox" class="form-control" id="editedPlayerActive" ng-model="editedPlayer.active" ng-disabled="!shouldShowEditing()">
+                            <input type="checkbox" class="form-control" id="editedPlayerActive" ng-model="editedPlayer.active" ng-disabled="!shouldShowEditing()" ng-change="updateUnsaved()">
                         </div>
                         <div class="form-group">
                             <label for="editedPlayerTall">Player Tall?</label>
-                            <select type="text" class="form-control" id="editedPlayerTall" ng-model="editedPlayer.tall" ng-disabled="!shouldShowEditing()">
+                            <select type="text" class="form-control" id="editedPlayerTall" ng-model="editedPlayer.tall" ng-disabled="!shouldShowEditing()" ng-change="updateUnsaved()">
                                 <option value="true">Yes</option>
                                 <option value="false">No</option>
                             </select>

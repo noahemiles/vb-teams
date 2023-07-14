@@ -6,7 +6,9 @@ angular.module('vb-teams', [])
         $scope.newPlayer = null;
         $scope.editedPlayer = null;
         $scope.currentTeam = null;
+        $scope.isCancel = false;
 
+        $scope.isUnsaved = false;
         $scope.isCreating = false;
         $scope.isViewing = false;
         $scope.isEditing = false;
@@ -35,15 +37,23 @@ angular.module('vb-teams', [])
             $scope.cancel();
         };
 
+        $scope.updateUnsaved = function updateUnsaved() {
+            if (!$scope.isUnsaved) {
+                $scope.isUnsaved = true;
+            }
+        };
+
         $scope.setEditedPlayerActive = function setEditedPlayerActive(active) {
             $scope.editedPlayer.active = active;
-        }
+        };
 
         $scope.setEditedPlayer = function setEditedPlayer(player) {
+            if ($scope.isCancel) return;
             $scope.editedPlayer = angular.copy(player);
         };
 
         $scope.setEditedTeam = function setEditedTeam(team) {
+            if ($scope.isCancel) return;
             $scope.oldTeam = team;
         };
 
@@ -212,18 +222,21 @@ angular.module('vb-teams', [])
         };
 
         $scope.startCreating = function startCreating() {
+            if ($scope.isCancel) return;
             $scope.isCreating = true;
             $scope.isEditing = false;
             resetNewPlayerForm();
         };
 
         $scope.startEditingTeam = function startEditingTeam() {
+            if ($scope.isCancel) return;
             $scope.isEditingTeam = true;
             $scope.isCreating = false;
             $scope.isEditing = false;
         };
 
         $scope.startEditing = function startEditing() {
+            if ($scope.isCancel) return;
             $scope.isEditing = true;
             $scope.isViewing = true;
             $scope.isCreating = false;
@@ -231,6 +244,7 @@ angular.module('vb-teams', [])
         };
 
         $scope.startViewing = function startViewing(player) {
+            if ($scope.isCancel) return;
             if ($scope.isViewing && $scope.isEditing) {
                 $scope.isEditing = false;
             } else if ($scope.isViewing && !$scope.isEditing && (($scope.editedPlayer && $scope.editedPlayer.id) == (player && player.id))) {
@@ -245,9 +259,17 @@ angular.module('vb-teams', [])
         };
 
         $scope.cancel = function cancel() {
+            if ($scope.isEditing && $scope.isUnsaved) {
+                if (!confirm("Delete Unsaved Changed?")) {
+                    $scope.isCancel = true;
+                    return;
+                }
+            }
+            $scope.isCancel = false;
             $scope.isEditing = false;
             $scope.isCreating = false;
             $scope.isViewing = false;
+            $scope.isUnsaved = false;
             $scope.isEditingTeam = false;
             $scope.editedPlayer = null;
         };
