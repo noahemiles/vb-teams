@@ -1,32 +1,166 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="vb-teams">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/style.css">
-    <link rel="shortcut icon" href="./assets/favicon/favicon.ico" type="image/x-icon">
-    <title>Volleyball Teams - Games</title>
+    <title>Vb Teams</title>
+
+    <link rel="stylesheet" href="assets/css/normalize.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="assets/css/vb-teams.css">
 </head>
 
-<body>
-    <header>
-        <ul class="flex no-list">
-            <li class="flex left"></li>
-            <li class="flex middle"></li>
-            <li id="sun-menu" class="flex right">
-                <img id="menu-icon" src="./assets/images/burger-menu-right.svg" alt="menu">
-            </li>
-        </ul>
-        <div id="mobile-menu" class="mobile-menu">
+<body ng-controller="MainCtrl">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <!-- LOGO -->
+                <a ng-click="setCurrentTeam()"><img class="logo" src="assets/img/volleyball.svg"></a>
+                <!-- SIDEBAR -->
+                <ul class="nav nav-sidebar">
+                    <!-- SHOW TEAMS -->
+                    <li ng-repeat="team in teams" ng-class="{'active':isCurrentTeam(team)}">
+                        <a ng-click="setCurrentTeam(team)">
+                            {{team}}
+                        </a>
+                        <!-- EDIT TEAMS -->
+                        <button type="button" class="btn btn-link"
+                            ng-click="setCurrentTeam(team);setEditedTeam(team);startEditingTeam();"><span
+                                class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                    </li>
+                    <!-- ADD TEAM -->
+                    <li>
+                        <form class="create-form" role="form" ng-submit="addTeam(newTeam)">
+                            <input type="text" ng-model="newTeam" ng-class="{'invalid':isInvalidTeam}"
+                                placeholder="Add Team" required>
+                            <button type="button" class="btn btn-link" ng-click="addTeam(newTeam);">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                            <button type="button" class="btn btn-link" ng-click="shuffleTeams();">
+                                <span class="glyphicon glyphicon-refresh"></span>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+                <!-- END SIDEBAR -->
+            </div>
+
+            <!-- MAIN VIEW -->
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <!-- SHOW PLAYERS -->
+                <div ng-repeat="player in players | orderBy:'name' | filter:playerFilter track by $index "
+                    ng-class="{active: isSelectedPlayer(player)}">
+                    <button type="button" class="close" ng-click="deletePlayer(player)">&times;</button>
+                    <input type="checkbox" name="" id="" ng-model="player.active">
+                    <button type="button" class="btn btn-link" ng-click="setEditedPlayer(player);startEditing();"><span
+                        class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                    <a>{{player.name}}</a>
+                    <a style="font-size: small;">{{player.team}}</a>
+                </div>
+                <hr />
+                <!-- CREATING -->
+                <div ng-if="shouldShowCreating()">
+                    <button type="button" class="btn btn-link" ng-click="startCreating()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Create Player
+                    </button>
+                    <form class="create-form" ng-show="isCreating" role="form" ng-submit="createPlayer(newPlayer)"
+                        novalidate>
+                        <div class="form-group">
+                            <label for="newPlayerName">Player Name</label>
+                            <input type="text" class="form-control" id="newPlayerName" ng-model="newPlayer.name"
+                                placeholder="Enter name" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPlayerGender">Player Gender</label>
+                            <select type="text" class="form-control" id="newPlayerGender" ng-model="newPlayer.gender">
+                                <option value="female">Female</option>
+                                <option value="male">Male</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPlayerActive">Player Active</label>
+                            <input type="checkbox" class="form-control" id="newPlayerActive" ng-model="newPlayer.active">
+                        </div>
+                        <div class="form-group">
+                            <label for="newPlayerTall">Player Tall?</label>
+                            <select type="text" class="form-control" id="newPlayerTall" ng-model="newPlayer.tall">
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-info btn-lg">Create</button>
+                        <button type="button" class="btn btn-default btn-lg pull-right"
+                            ng-click="cancel()">Cancel</button>
+                    </form>
+                </div>
+                <!-- EDITING -->
+                <div ng-show="shouldShowEditing()">
+                    <h4>Editing {{editedPlayer.displayName}}</h4>
+
+                    <form class="edit-form" role="form" ng-submit="updatePlayer(editedPlayer)" novalidate>
+                        <div class="form-group">
+                            <label>Player Name</label>
+                            <input type="text" class="form-control" ng-model="editedPlayer.name"
+                                placeholder="Enter name" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label for="editedPlayerGender">Player Gender</label>
+                            <select type="text" class="form-control" id="editedPlayerGender"
+                                ng-model="editedPlayer.gender">
+                                <option value="female">Female</option>
+                                <option value="male">Male</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Player Team</label>
+                            <select class="form-control" ng-options="team for team in teams"
+                                ng-model="editedPlayer.team" ng-selected="editedPlayer.team">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editedPlayerActive">Player Active</label>
+                            <input type="checkbox" class="form-control" id="editedPlayerActive" ng-model="editedPlayer.active">
+                        </div>
+                        <div class="form-group">
+                            <label for="editedPlayerTall">Player Tall?</label>
+                            <select type="text" class="form-control" id="editedPlayerTall" ng-model="editedPlayer.tall">
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-info btn-lg">Save</button>
+                        <button type="button" class="btn btn-default btn-lg pull-right"
+                            ng-click="cancel()">Cancel</button>
+                    </form>
+                </div>
+                <!-- EDITING TEAM -->
+                <div ng-show="shouldShowEditingTeam()">
+                    <h4>Editing {{currentTeam}}</h4>
+                    <form class="edit-form" role="form" ng-submit="updateTeam(editedTeam)" novalidate>
+                        <div class="form-group">
+                            <label for="editTeamName">Team Name</label>
+                            <input type="text" class="form-control" id="editedTeam" ng-model="editedTeam"
+                                placeholder="Enter name" ng-value="oldTeam">
+                        </div>
+                        <button type="submit" class="btn btn-info btn-lg">Save</button>
+                        <button type="button" class="btn btn-default btn-lg pull-right"
+                            ng-click="cancel()">Cancel</button>
+                        <button type="button" class="btn btn-default btn-lg pull-right red"
+                            ng-click="deleteTeam(currentTeam);">Delete Team</button>
+                    </form>
+                </div>
+            </div>
+
         </div>
-    </header>
-    <main>
-        <span id="games" class="flex"></span>
-    </main>
-    <script src="build/menu.js"></script>
-    <script type="module" src="build/driver.js"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="./js/main.js"></script>
 </body>
 
 </html>
