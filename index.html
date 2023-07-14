@@ -55,16 +55,16 @@
                 <div ng-repeat="player in players | orderBy:'name' | filter:playerFilter track by $index "
                     ng-class="{active: isSelectedPlayer(player)}">
                     <button type="button" class="close" ng-click="deletePlayer(player)">&times;</button>
-                    <input type="checkbox" name="" id="" ng-model="player.active">
+                    <input type="checkbox" name="" id="" ng-model="player.active" ng-change="cancel()">
                     <button type="button" class="btn btn-link" ng-click="setEditedPlayer(player);startEditing();"><span
                         class="glyphicon glyphicon-pencil"></span>
                     </button>
-                    <a>{{player.name}}</a>
+                    <a ng-click="setEditedPlayer(player);startViewing();">{{player.name}}</a>
                     <a style="font-size: small;">{{player.team}}</a>
                 </div>
                 <hr />
                 <!-- CREATING -->
-                <div ng-if="shouldShowCreating()">
+                <div ng-if="shouldShowCreating();">
                     <button type="button" class="btn btn-link" ng-click="startCreating()">
                         <span class="glyphicon glyphicon-plus"></span>
                         Create Player
@@ -100,8 +100,8 @@
                     </form>
                 </div>
                 <!-- EDITING -->
-                <div ng-show="shouldShowEditing()">
-                    <h4>Editing {{editedPlayer.displayName}}</h4>
+                <div ng-show="shouldShowViewing()">
+                    <h4 >Editing {{editedPlayer.displayName}}</h4>
 
                     <form class="edit-form" role="form" ng-submit="updatePlayer(editedPlayer)" novalidate>
                         <div class="form-group">
@@ -134,8 +134,8 @@
                                 <option value="false">No</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-info btn-lg">Save</button>
-                        <button type="button" class="btn btn-default btn-lg pull-right"
+                        <button ng-show="shouldShowEditing()" type="submit" class="btn btn-info btn-lg">Save</button>
+                        <button ng-show="shouldShowEditing()" type="button" class="btn btn-default btn-lg pull-right"
                             ng-click="cancel()">Cancel</button>
                     </form>
                 </div>
