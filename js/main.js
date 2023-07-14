@@ -196,7 +196,7 @@ angular.module('vb-teams', [])
         // creating and editing
 
         $scope.shouldShowCreating = function shouldShowCreating() {
-            return !$scope.isEditing;
+            return !$scope.isViewing && !$scope.isEditing;
         };
 
         $scope.shouldShowEditing = function shouldShowEditing() {
@@ -230,11 +230,16 @@ angular.module('vb-teams', [])
             $scope.isEditingTeam = false;
         };
 
-        $scope.startViewing = function startViewing() {
+        $scope.startViewing = function startViewing(player) {
             if ($scope.isViewing && $scope.isEditing) {
                 $scope.isEditing = false;
+            } else if ($scope.isViewing && !$scope.isEditing && (($scope.editedPlayer && $scope.editedPlayer.id) == (player && player.id))) {
+                $scope.isViewing = false;
+            } else {
+                $scope.isViewing = true;
             }
-            $scope.isViewing = true;
+            console.log($scope.editedPlayer);
+            console.log(player);
             $scope.isCreating = false;
             $scope.isEditingTeam = false;
         };

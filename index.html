@@ -59,7 +59,7 @@
                     <button type="button" class="btn btn-link" ng-click="setEditedPlayer(player);startEditing();"><span
                         class="glyphicon glyphicon-pencil"></span>
                     </button>
-                    <a ng-click="setEditedPlayer(player);startViewing();">{{player.name}}</a>
+                    <a ng-click="startViewing(player);setEditedPlayer(player);">{{player.name}}</a>
                     <a style="font-size: small;">{{player.team}}</a>
                 </div>
                 <hr />
@@ -100,8 +100,8 @@
                     </form>
                 </div>
                 <!-- EDITING -->
-                <div ng-show="shouldShowViewing()">
-                    <h4 >Editing {{editedPlayer.displayName}}</h4>
+                <div ng-show="shouldShowViewing();">
+                    <h4 ng-show="shouldShowEditing();">Editing {{editedPlayer.displayName}}</h4>
 
                     <form class="edit-form" role="form" ng-submit="updatePlayer(editedPlayer)" novalidate>
                         <div class="form-group">
