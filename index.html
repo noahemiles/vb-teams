@@ -52,6 +52,7 @@
             <!-- MAIN VIEW -->
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <!-- SHOW PLAYERS -->
+                <label ng-show="isCurrentTeam(currentTeam)">Viewing {{currentTeam}}</label>
                 <div ng-repeat="player in players | orderBy:'name' | filter:playerFilter track by $index "
                     ng-class="{active: isSelectedPlayer(player)}">
                     <button type="button" class="close" ng-click="deletePlayer(player)">&times;</button>
@@ -59,7 +60,7 @@
                     <button type="button" class="btn btn-link" ng-click="cancel();setEditedPlayer(player);startEditing();"><span
                         class="glyphicon glyphicon-pencil"></span>
                     </button>
-                    <a ng-click="cancel();startViewing(player);setEditedPlayer(player);">{{player.name}}</a>
+                    <a ng-class="{male: player.gender == 'male', female: player.gender == 'female' }" ng-click="cancel();setEditedPlayer(player);startViewing();">{{player.name}}</a>
                     <a style="font-size: small;">{{player.team}}</a>
                 </div>
                 <hr />
@@ -87,7 +88,7 @@
                             <label for="newPlayerActive">Player Active</label>
                             <input type="checkbox" class="form-control" id="newPlayerActive" ng-model="newPlayer.active">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-show="false">
                             <label for="newPlayerTall">Player Tall?</label>
                             <select type="text" class="form-control" id="newPlayerTall" ng-model="newPlayer.tall">
                                 <option value="true">Yes</option>
@@ -95,7 +96,7 @@
                             </select>
                         </div>
                         <button type="submit" class="btn btn-info btn-lg">Create</button>
-                        <button type="button" class="btn btn-default btn-lg pull-right"
+                        <button type="button" class="btn btn-default btn-lg pull-right btn-warning"
                             ng-click="cancel()">Cancel</button>
                     </form>
                 </div>
@@ -106,8 +107,8 @@
                     <form class="edit-form" role="form" ng-submit="updatePlayer(editedPlayer)" novalidate>
                         <div class="form-group">
                             <label>Player Name</label>
-                            <input type="text" class="form-control" ng-model="editedPlayer.name" ng-disabled="!shouldShowEditing()" ng-change="updateUnsaved()"
-                                placeholder="Enter name" autofocus>
+                            <input type="text" class="form-control" ng-model="editedPlayer.name" ng-disabled="!shouldShowEditing()" ng-change="updateUnsaved()" 
+                            	placeholder="Enter name" autofocus>
                         </div>
                         <div class="form-group">
                             <label for="editedPlayerGender">Player Gender</label>
@@ -127,16 +128,18 @@
                             <label for="editedPlayerActive">Player Active</label>
                             <input type="checkbox" class="form-control" id="editedPlayerActive" ng-model="editedPlayer.active" ng-disabled="!shouldShowEditing()" ng-change="updateUnsaved()">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-show="false">
                             <label for="editedPlayerTall">Player Tall?</label>
                             <select type="text" class="form-control" id="editedPlayerTall" ng-model="editedPlayer.tall" ng-disabled="!shouldShowEditing()" ng-change="updateUnsaved()">
                                 <option value="true">Yes</option>
                                 <option value="false">No</option>
                             </select>
                         </div>
-                        <button ng-show="shouldShowEditing()" type="submit" class="btn btn-info btn-lg">Save</button>
-                        <button ng-show="shouldShowEditing()" type="button" class="btn btn-default btn-lg pull-right"
+                        <div ng-show="shouldShowEditing();">
+                            <button type="submit" class="btn btn-info btn-lg">Save</button>
+                            <button type="button" class="btn btn-default btn-lg pull-right"
                             ng-click="cancel()">Cancel</button>
+                        </div>
                     </form>
                 </div>
                 <!-- EDITING TEAM -->
@@ -151,7 +154,7 @@
                         <button type="submit" class="btn btn-info btn-lg">Save</button>
                         <button type="button" class="btn btn-default btn-lg pull-right"
                             ng-click="cancel()">Cancel</button>
-                        <button type="button" class="btn btn-default btn-lg pull-right red"
+                        <button type="button" class="btn btn-default btn-lg pull-right btn-danger"
                             ng-click="deleteTeam(currentTeam);">Delete Team</button>
                     </form>
                 </div>

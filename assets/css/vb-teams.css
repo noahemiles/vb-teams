@@ -12,6 +12,14 @@ a {
     text-decoration: none;
 }
 
+a.male {
+    color: rgb(118, 197, 223);
+}
+
+a.female {
+    color: rgb(255, 136, 154);
+}
+
 a:hover {
     color: #5bc0de;
 }

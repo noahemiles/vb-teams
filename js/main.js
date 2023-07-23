@@ -243,18 +243,11 @@ angular.module('vb-teams', [])
             $scope.isEditingTeam = false;
         };
 
-        $scope.startViewing = function startViewing(player) {
-            if ($scope.isCancel) return;
-            if ($scope.isViewing && $scope.isEditing) {
-                $scope.isEditing = false;
-            } else if ($scope.isViewing && !$scope.isEditing && (($scope.editedPlayer && $scope.editedPlayer.id) == (player && player.id))) {
-                $scope.isViewing = false;
-            } else {
-                $scope.isViewing = true;
-            }
-            console.log($scope.editedPlayer);
-            console.log(player);
+        $scope.startViewing = function startViewing() {
+        	if ($scope.isCancel) return;
+            $scope.isViewing = true;
             $scope.isCreating = false;
+            $scope.isEditing = false;
             $scope.isEditingTeam = false;
         };
 
