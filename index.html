@@ -60,7 +60,7 @@
                     <button type="button" class="btn btn-link" ng-click="cancel();setEditedPlayer(player);startEditing();"><span
                         class="glyphicon glyphicon-pencil"></span>
                     </button>
-                    <a ng-class="{male: player.gender == 'male', female: player.gender == 'female' }" ng-click="cancel();setEditedPlayer(player);startViewing();">{{player.name}}</a>
+                    <a ng-class="{inactive: !player.active, male: player.gender == 'male' && player.active, female: player.gender == 'female' && player.active }" ng-click="cancel();setEditedPlayer(player);startViewing();">{{player.name}}</a>
                     <a style="font-size: small;">{{player.team}}</a>
                 </div>
                 <hr />

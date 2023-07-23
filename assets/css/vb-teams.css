@@ -20,6 +20,11 @@ a.female {
     color: rgb(255, 136, 154);
 }
 
+a.inactive {
+    color: lightslategray !important;
+    opacity: 50%;
+}
+
 a:hover {
     color: #5bc0de;
 }
